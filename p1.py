@@ -41,7 +41,7 @@ def diffmanch(signal):
         if bit == 0:
             encoded_data.extend([encoded_data[(i*2)],encoded_data[(i*2)+1]])
         else:
-            encoded_data.extend([encoded_data[i+2], encoded_data[i+1]])           
+            encoded_data.extend([encoded_data[(i*2)+1],encoded_data[(i*2)]])           
     plot(encoded_data, encoded_data)
     return encoded_data
 
@@ -59,7 +59,7 @@ def plot(data_sequence,encoded_data):
 
 
 a = input("You want to convert a digital signal or an analog signal")
-signal = [1,0,1,0,1]
+signal = [0,1,0,1,0]
 if a.lower() == "digital":
     b=input("what type of encoding you want (NRZ-L, NRZ-I,Manchester, Differential Manchester, AMI): ")
     if b.lower() == "nrz-i":
