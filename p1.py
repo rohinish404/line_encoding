@@ -37,25 +37,17 @@ def swap(my_array):
 def diffmanch(signal):
     encoded_data = []
     encoded_data.extend([-1,1] if signal[0]==1 else [1,-1])
-    # last_bit = signal[0]  
     for i,bit in enumerate(signal[1:]):
         if bit == 0:
-            print("bit=0")
-            print(encoded_data[i:i+2])
-            encoded_data.extend(encoded_data[i:i+2])
+            encoded_data.extend([encoded_data[(i*2)],encoded_data[(i*2)+1]])
         else:
-            print("bit=1")
-            print([encoded_data[i+1], encoded_data[i]])
-            encoded_data.extend([encoded_data[i+1], encoded_data[i]])
-        i+=1
-        # last_bit = bit
+            encoded_data.extend([encoded_data[i+2], encoded_data[i+1]])           
     plot(encoded_data, encoded_data)
     return encoded_data
 
 
 def plot(data_sequence,encoded_data):
     df = pd.DataFrame({'Time': range(len(data_sequence)), 'Voltage Level': encoded_data})
-
     print(df)
     sns.lineplot(x='Time', y='Voltage Level', drawstyle='steps-post', marker='o', data=df)
     plt.ylim(-1.5, 1.5)
