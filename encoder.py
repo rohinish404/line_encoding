@@ -168,33 +168,3 @@ def sig(x):
         signal.append(a)
     return signal
 
-ch = 'yes'
-while ch == "yes":
-    a = input("You want to convert a digital signal or an analog signal")
-    n = int(input("enter the number of bits: "))
-    signal = sig(n)
-    if a.lower() == "digital":
-        b=input("what type of encoding you want (NRZ-L, NRZ-I,Manchester, Differential Manchester, AMI): ")
-        if b.lower() == "nrz-i":
-            nrzi(signal)
-        elif b.lower() == "nrz-l":
-            nrzl(signal)
-        elif b.lower() == "manchester":
-            manchester(signal)
-        elif b.lower() == "differential manchester":
-            diffmanch(signal)
-        elif b.lower() == "ami":
-            x = input("scrambler needed? (yes/no): ")
-            if x.lower()=="yes":
-                x1 = int(input("which scrambler (8/4): "))
-                if x1==8:
-                    eight_zero(signal)
-                else:
-                    four_zero(signal)
-            else:
-                ami(signal)
-        else:
-            print("enter correct technique")
-    else:
-        print("enter correct signal")
-    ch = input("want to do more encoding (yes/no):")
