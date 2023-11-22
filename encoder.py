@@ -5,7 +5,7 @@ import pandas as pd
 
 def nrzl(signal):
     signal.append(signal[-1])
-    newsignal = [-1 if item == 0 else item for item in signal]
+    newsignal = [-1 if item == 1 else 1 for item in signal]
     print("Orignal signal: ",signal)
     print("Encoded signal: ",newsignal)
     plot(signal,newsignal)
@@ -31,24 +31,24 @@ def manchester(signal):
     encoded_data = []
     for bit in signal:
         encoded_data.extend([-1,1] if bit==1 else [1,-1])
-    encoded_data.append(encoded_data[-1])    
-    plot(encoded_data,encoded_data)
+    encoded_data.append(encoded_data[-1])
     print("Orignal signal: ",signal)
-    print("Encoded signal: ",encoded_data)
+    print("Encoded signal: ",encoded_data)    
+    plot(encoded_data,encoded_data)
     return encoded_data
 
 
 def diffmanch(signal):
     encoded_data = []
-    encoded_data.extend([-1,1] if signal[0]==1 else [1,-1])
+    encoded_data.extend([-1,1] if signal[0]==0 else [1,-1])
     for i,bit in enumerate(signal[1:]):
         if bit == 0:
             encoded_data.extend([encoded_data[(i*2)],encoded_data[(i*2)+1]])
         else:
             encoded_data.extend([encoded_data[(i*2)+1],encoded_data[(i*2)]])           
-    plot(encoded_data, encoded_data)
     print("Orignal signal: ",signal)
     print("Encoded signal: ",encoded_data)
+    plot(encoded_data, encoded_data)
     return encoded_data
 
 
@@ -65,10 +65,9 @@ def ami(signal):
             else:
                 encoded_data.append(1)
                 previous_nonzero=1
-    print(encoded_data)
-    plot(encoded_data,encoded_data)
     print("Orignal signal: ",signal)
     print("Encoded signal: ",encoded_data)
+    plot(encoded_data,encoded_data)
     return encoded_data
 
 
@@ -167,4 +166,5 @@ def sig(x):
         a = int(input("enter the bit"))
         signal.append(a)
     return signal
+
 
